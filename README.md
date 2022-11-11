@@ -6,8 +6,17 @@ By Minh Dang, Andre Flores, Ahmar Huda, and Komal Kaur
 
 
 Summary:
-
 Blah blah blah
+
+
+Group Project Doc:
+https://docs.google.com/document/d/1qH5SuujHXRKzFGE-mnAHZCVRpUi2ZrFd9i0WPj3qUek/edit
+
+Group Proposal:
+https://docs.google.com/document/d/1NC24eOdCMay0wlYz8URxHRQlvsmW5rl-iq9MH1FRbvM/edit?usp=share_link
+
+Data:
+https://www.kaggle.com/datasets/uciml/student-alcohol-consumption
 
 
 To-Do:
