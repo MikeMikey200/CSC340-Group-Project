@@ -12,6 +12,11 @@ public:
 	Data();
 	Data(std::string inFile);
 
+	//printing the whole data file
+	void printData() const;
+	//printing number of data on top and bottom
+	void printDataPartial(unsigned int top, unsigned int bottom) const;
+
 	//accessors
 	std::vector<std::string> getSchool() const;
 	std::vector<char> getSex() const;
@@ -48,9 +53,11 @@ public:
 	std::vector<int> getG3() const;
 
 private:
+	//functions
 	//convert binaries from yes/or to 1/0
 	int convertBinary(std::string str);
 
+	//variables
 	//student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)
 	std::vector<std::string> school;
 	//student's sex (binary: 'F' - female or 'M' - male)

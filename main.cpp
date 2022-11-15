@@ -6,9 +6,8 @@ int main()
 
     //sample of how to use Data class
     Data mat("student-mat.csv");
-    vector<int> matG1 = mat.getG1();
-    for (int num : matG1) {
-        cout << num << endl;
-    }
+    
+    mat.printDataPartial(10, 10);
+
     return 0;
 }

@@ -1,28 +1,28 @@
 #include "dataHandling.h"
 
-Data::Data(){}
+Data::Data() {}
 
 Data::Data(std::string fname) {
 	std::string str, token;
 	std::stringstream sstr;
 	std::vector<std::string> vstr;
 	std::ifstream inFile;
-	
+
 	inFile.open(fname);
 
 	if (!inFile) {
 		std::cout << "File unable to open!" << std::endl;
 	}
-	
+
 	//ignoring first line
 	getline(inFile, str);
 
-    //scanning line by line
+	//scanning line by line
 	while (getline(inFile, str)) {
 		sstr.clear();
 		sstr.str(str);
 
-        //getting items by ',' delimiter individually in the line
+		//getting items by ',' delimiter individually in the line
 		getline(sstr, token, ',');
 		school.push_back(token);
 		getline(sstr, token, ',');
@@ -92,7 +92,129 @@ Data::Data(std::string fname) {
 	}
 }
 
-std::vector<std::string> Data::getSchool() const{
+int Data::convertBinary(std::string str) {
+	if (str == "yes")
+		return 1;
+	else
+		return 0;
+}
+
+void Data::printData() const {
+	for (unsigned int i = 0; i < school.size(); i++) {
+		std::cout
+			<< school[i] << " "
+			<< sex[i] << " "
+			<< age[i] << " "
+			<< address[i] << " "
+			<< famsize[i] << " "
+			<< Pstatus[i] << " "
+			<< Medu[i] << " "
+			<< Fedu[i] << " "
+			<< Mjob[i] << " "
+			<< Fjob[i] << " "
+			<< reason[i] << " "
+			<< guardian[i] << " "
+			<< traveltime[i] << " "
+			<< studytime[i] << " "
+			<< failures[i] << " "
+			<< school[i] << " "
+			<< famsup[i] << " "
+			<< paid[i] << " "
+			<< activities[i] << " "
+			<< nursery[i] << " "
+			<< higher[i] << " "
+			<< internet[i] << " "
+			<< romantic[i] << " "
+			<< famrel[i] << " "
+			<< freetime[i] << " "
+			<< goout[i] << " "
+			<< Dalc[i] << " "
+			<< Walc[i] << " "
+			<< health[i] << " "
+			<< absences[i] << " "
+			<< G1[i] << " "
+			<< G2[i] << " "
+			<< G3[i] << " " << std::endl;
+	}
+}
+
+void Data::printDataPartial(unsigned int top, unsigned int bottom) const {
+	for (unsigned int i = 0; i < school.size() && top > 0; i++, top--) {
+		std::cout
+			<< school[i] << " "
+			<< sex[i] << " "
+			<< age[i] << " "
+			<< address[i] << " "
+			<< famsize[i] << " "
+			<< Pstatus[i] << " "
+			<< Medu[i] << " "
+			<< Fedu[i] << " "
+			<< Mjob[i] << " "
+			<< Fjob[i] << " "
+			<< reason[i] << " "
+			<< guardian[i] << " "
+			<< traveltime[i] << " "
+			<< studytime[i] << " "
+			<< failures[i] << " "
+			<< school[i] << " "
+			<< famsup[i] << " "
+			<< paid[i] << " "
+			<< activities[i] << " "
+			<< nursery[i] << " "
+			<< higher[i] << " "
+			<< internet[i] << " "
+			<< romantic[i] << " "
+			<< famrel[i] << " "
+			<< freetime[i] << " "
+			<< goout[i] << " "
+			<< Dalc[i] << " "
+			<< Walc[i] << " "
+			<< health[i] << " "
+			<< absences[i] << " "
+			<< G1[i] << " "
+			<< G2[i] << " "
+			<< G3[i] << " " << std::endl;
+	}
+
+	for (unsigned int i = school.size() - 1; i >= 0 && bottom > 0; i--, bottom--) {
+		std::cout
+			<< school[i] << " "
+			<< sex[i] << " "
+			<< age[i] << " "
+			<< address[i] << " "
+			<< famsize[i] << " "
+			<< Pstatus[i] << " "
+			<< Medu[i] << " "
+			<< Fedu[i] << " "
+			<< Mjob[i] << " "
+			<< Fjob[i] << " "
+			<< reason[i] << " "
+			<< guardian[i] << " "
+			<< traveltime[i] << " "
+			<< studytime[i] << " "
+			<< failures[i] << " "
+			<< school[i] << " "
+			<< famsup[i] << " "
+			<< paid[i] << " "
+			<< activities[i] << " "
+			<< nursery[i] << " "
+			<< higher[i] << " "
+			<< internet[i] << " "
+			<< romantic[i] << " "
+			<< famrel[i] << " "
+			<< freetime[i] << " "
+			<< goout[i] << " "
+			<< Dalc[i] << " "
+			<< Walc[i] << " "
+			<< health[i] << " "
+			<< absences[i] << " "
+			<< G1[i] << " "
+			<< G2[i] << " "
+			<< G3[i] << " " << std::endl;
+	}
+}
+
+std::vector<std::string> Data::getSchool() const {
 	return school;
 }
 
@@ -252,11 +374,4 @@ std::vector<int> Data::getG2() const
 std::vector<int> Data::getG3() const
 {
 	return G3;
-}
-
-int Data::convertBinary(std::string str) {
-	if (str == "yes")
-		return 1;
-	else 
-		return 0;
 }
