@@ -57,3 +57,9 @@ Data Variables:
 28. Walc - weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)
 29. health - current health status (numeric: from 1 - very bad to 5 - very good)
 30. absences - number of school absences (numeric: from 0 to 93)
+
+These grades are related with the course subject, Math or Portuguese:
+
+G1 - first period grade (numeric: from 0 to 20)
+G2 - second period grade (numeric: from 0 to 20)
+G3 - final grade (numeric: from 0 to 20, output target)
