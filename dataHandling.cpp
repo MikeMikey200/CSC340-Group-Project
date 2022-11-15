@@ -17,10 +17,12 @@ Data::Data(std::string fname) {
 	//ignoring first line
 	getline(inFile, str);
 
+    //scanning line by line
 	while (getline(inFile, str)) {
 		sstr.clear();
 		sstr.str(str);
 
+        //getting items by ',' delimiter individually in the line
 		getline(sstr, token, ',');
 		school.push_back(token);
 		getline(sstr, token, ',');
@@ -52,21 +54,21 @@ Data::Data(std::string fname) {
 		getline(sstr, token, ',');
 		failures.push_back(std::stoi(token));
 		getline(sstr, token, ',');
-		schoolsup.push_back(token);
+		schoolsup.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		famsup.push_back(token);
+		famsup.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		paid.push_back(token);
+		paid.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		activities.push_back(token);
+		activities.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		nursery.push_back(token);
+		nursery.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		higher.push_back(token);
+		higher.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		internet.push_back(token);
+		internet.push_back(convertBinary(token));
 		getline(sstr, token, ',');
-		romantic.push_back(token);
+		romantic.push_back(convertBinary(token));
 		getline(sstr, token, ',');
 		famrel.push_back(std::stoi(token));
 		getline(sstr, token, ',');
@@ -162,42 +164,42 @@ std::vector<int> Data::getFailures() const
 	return failures;
 }
 
-std::vector<std::string> Data::getSchoolsup() const
+std::vector<int> Data::getSchoolsup() const
 {
 	return schoolsup;
 }
 
-std::vector<std::string> Data::getFamsup() const
+std::vector<int> Data::getFamsup() const
 {
 	return famsup;
 }
 
-std::vector<std::string> Data::getPaid() const
+std::vector<int> Data::getPaid() const
 {
 	return paid;
 }
 
-std::vector<std::string> Data::getActivities() const
+std::vector<int> Data::getActivities() const
 {
 	return activities;
 }
 
-std::vector<std::string> Data::getNursery() const
+std::vector<int> Data::getNursery() const
 {
 	return nursery;
 }
 
-std::vector<std::string> Data::getHigher() const
+std::vector<int> Data::getHigher() const
 {
 	return higher;
 }
 
-std::vector<std::string> Data::getInternet() const
+std::vector<int> Data::getInternet() const
 {
 	return internet;
 }
 
-std::vector<std::string> Data::getRomantic() const
+std::vector<int> Data::getRomantic() const
 {
 	return romantic;
 }
@@ -250,4 +252,11 @@ std::vector<int> Data::getG2() const
 std::vector<int> Data::getG3() const
 {
 	return G3;
+}
+
+int Data::convertBinary(std::string str) {
+	if (str == "yes")
+		return 1;
+	else 
+		return 0;
 }

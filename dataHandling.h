@@ -28,14 +28,14 @@ public:
 	std::vector<int> getTraveltime() const;
 	std::vector<int> getStudytime() const;
 	std::vector<int> getFailures() const;
-	std::vector<std::string> getSchoolsup() const;
-	std::vector<std::string> getFamsup() const;
-	std::vector<std::string> getPaid() const;
-	std::vector<std::string> getActivities() const;
-	std::vector<std::string> getNursery() const;
-	std::vector<std::string> getHigher() const;
-	std::vector<std::string> getInternet() const;
-	std::vector<std::string> getRomantic() const;
+	std::vector<int> getSchoolsup() const;
+	std::vector<int> getFamsup() const;
+	std::vector<int> getPaid() const;
+	std::vector<int> getActivities() const;
+	std::vector<int> getNursery() const;
+	std::vector<int> getHigher() const;
+	std::vector<int> getInternet() const;
+	std::vector<int> getRomantic() const;
 	std::vector<int> getFamrel() const;
 	std::vector<int> getFreetime() const;
 	std::vector<int> getGoout() const;
@@ -48,6 +48,9 @@ public:
 	std::vector<int> getG3() const;
 
 private:
+	//convert binaries from yes/or to 1/0
+	int convertBinary(std::string str);
+
 	//student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)
 	std::vector<std::string> school;
 	//student's sex (binary: 'F' - female or 'M' - male)
@@ -79,21 +82,21 @@ private:
 	//number of past class failures (numeric: n if 1<=n<3, else 4)
 	std::vector<int> failures;
 	//extra educational support (binary: yes or no)
-	std::vector<std::string> schoolsup;
+	std::vector<int> schoolsup;
 	//family educational support (binary: yes or no)
-	std::vector<std::string> famsup;
+	std::vector<int> famsup;
 	//extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)
-	std::vector<std::string> paid;
+	std::vector<int> paid;
 	//extra-curricular activities (binary: yes or no)
-	std::vector<std::string> activities;
+	std::vector<int> activities;
 	//attended nursery school (binary: yes or no)
-	std::vector<std::string> nursery;
+	std::vector<int> nursery;
 	//wants to take higher education (binary: yes or no)
-	std::vector<std::string> higher;
+	std::vector<int> higher;
 	//Internet access at home (binary: yes or no)
-	std::vector<std::string> internet;
+	std::vector<int> internet;
 	//with a romantic relationship (binary: yes or no)
-	std::vector<std::string> romantic;
+	std::vector<int> romantic;
 	//quality of family relationships (numeric: from 1 - very bad to 5 - excellent)
 	std::vector<int> famrel;
 	//free time after school (numeric: from 1 - very low to 5 - very high)
