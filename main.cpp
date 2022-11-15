@@ -6,8 +6,10 @@ int main()
 
     //sample of how to use Data class
     Data mat("student-mat.csv");
+
+    cout << "hello world!" << endl;
     
-    mat.printDataPartial(10, 10);
+    mat.printData();
 
     return 0;
 }

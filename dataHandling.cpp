@@ -101,116 +101,116 @@ int Data::convertBinary(std::string str) {
 
 void Data::printData() const {
 	for (unsigned int i = 0; i < school.size(); i++) {
-		std::cout
-			<< school[i] << " "
-			<< sex[i] << " "
-			<< age[i] << " "
-			<< address[i] << " "
-			<< famsize[i] << " "
-			<< Pstatus[i] << " "
-			<< Medu[i] << " "
-			<< Fedu[i] << " "
-			<< Mjob[i] << " "
-			<< Fjob[i] << " "
-			<< reason[i] << " "
-			<< guardian[i] << " "
-			<< traveltime[i] << " "
-			<< studytime[i] << " "
-			<< failures[i] << " "
-			<< school[i] << " "
-			<< famsup[i] << " "
-			<< paid[i] << " "
-			<< activities[i] << " "
-			<< nursery[i] << " "
-			<< higher[i] << " "
-			<< internet[i] << " "
-			<< romantic[i] << " "
-			<< famrel[i] << " "
-			<< freetime[i] << " "
-			<< goout[i] << " "
-			<< Dalc[i] << " "
-			<< Walc[i] << " "
-			<< health[i] << " "
-			<< absences[i] << " "
-			<< G1[i] << " "
-			<< G2[i] << " "
-			<< G3[i] << " " << std::endl;
-	}
+		std::cout << std::left
+			<< std::setw(3) << school[i] 
+			<< std::setw(2) << sex[i] 
+			<< std::setw(3) << age[i] 
+			<< std::setw(2) << address[i] 
+			<< std::setw(4) << famsize[i] 
+			<< std::setw(2) << Pstatus[i] 
+			<< std::setw(2) << Medu[i] 
+			<< std::setw(2) << Fedu[i] 
+			<< std::setw(10) << Mjob[i] 
+			<< std::setw(10) << Fjob[i] 
+			<< std::setw(11) << reason[i] 
+			<< std::setw(7) << guardian[i] 
+			<< std::setw(2) << traveltime[i] 
+			<< std::setw(2) << studytime[i] 
+			<< std::setw(2) << failures[i] 
+			<< std::setw(2) << schoolsup[i] 
+			<< std::setw(2) << famsup[i] 
+			<< std::setw(2) << paid[i] 
+			<< std::setw(2) << activities[i] 
+			<< std::setw(2) << nursery[i] 
+			<< std::setw(2) << higher[i] 
+			<< std::setw(2) << internet[i] 
+			<< std::setw(2) << romantic[i] 
+			<< std::setw(2) << famrel[i] 
+			<< std::setw(2) << freetime[i] 
+			<< std::setw(2) << goout[i] 
+			<< std::setw(2) << Dalc[i] 
+			<< std::setw(2) << Walc[i] 
+			<< std::setw(2) << health[i] 
+			<< std::setw(3) << absences[i] 
+			<< std::setw(3) << G1[i] 
+			<< std::setw(3) << G2[i] 
+			<< std::setw(3) << G3[i]  << std::endl;
+	}			
 }
 
 void Data::printDataPartial(unsigned int top, unsigned int bottom) const {
 	for (unsigned int i = 0; i < school.size() && top > 0; i++, top--) {
-		std::cout
-			<< school[i] << " "
-			<< sex[i] << " "
-			<< age[i] << " "
-			<< address[i] << " "
-			<< famsize[i] << " "
-			<< Pstatus[i] << " "
-			<< Medu[i] << " "
-			<< Fedu[i] << " "
-			<< Mjob[i] << " "
-			<< Fjob[i] << " "
-			<< reason[i] << " "
-			<< guardian[i] << " "
-			<< traveltime[i] << " "
-			<< studytime[i] << " "
-			<< failures[i] << " "
-			<< school[i] << " "
-			<< famsup[i] << " "
-			<< paid[i] << " "
-			<< activities[i] << " "
-			<< nursery[i] << " "
-			<< higher[i] << " "
-			<< internet[i] << " "
-			<< romantic[i] << " "
-			<< famrel[i] << " "
-			<< freetime[i] << " "
-			<< goout[i] << " "
-			<< Dalc[i] << " "
-			<< Walc[i] << " "
-			<< health[i] << " "
-			<< absences[i] << " "
-			<< G1[i] << " "
-			<< G2[i] << " "
-			<< G3[i] << " " << std::endl;
+		std::cout << std::left
+			<< std::setw(3) << school[i]
+			<< std::setw(2) << sex[i]
+			<< std::setw(3) << age[i]
+			<< std::setw(2) << address[i]
+			<< std::setw(4) << famsize[i]
+			<< std::setw(2) << Pstatus[i]
+			<< std::setw(2) << Medu[i]
+			<< std::setw(2) << Fedu[i]
+			<< std::setw(10) << Mjob[i]
+			<< std::setw(10) << Fjob[i]
+			<< std::setw(11) << reason[i]
+			<< std::setw(7) << guardian[i]
+			<< std::setw(2) << traveltime[i]
+			<< std::setw(2) << studytime[i]
+			<< std::setw(2) << failures[i]
+			<< std::setw(2) << schoolsup[i]
+			<< std::setw(2) << famsup[i]
+			<< std::setw(2) << paid[i]
+			<< std::setw(2) << activities[i]
+			<< std::setw(2) << nursery[i]
+			<< std::setw(2) << higher[i]
+			<< std::setw(2) << internet[i]
+			<< std::setw(2) << romantic[i]
+			<< std::setw(2) << famrel[i]
+			<< std::setw(2) << freetime[i]
+			<< std::setw(2) << goout[i]
+			<< std::setw(2) << Dalc[i]
+			<< std::setw(2) << Walc[i]
+			<< std::setw(2) << health[i]
+			<< std::setw(3) << absences[i]
+			<< std::setw(3) << G1[i]
+			<< std::setw(3) << G2[i]
+			<< std::setw(3) << G3[i] << std::endl;
 	}
 
 	for (unsigned int i = school.size() - 1; i >= 0 && bottom > 0; i--, bottom--) {
-		std::cout
-			<< school[i] << " "
-			<< sex[i] << " "
-			<< age[i] << " "
-			<< address[i] << " "
-			<< famsize[i] << " "
-			<< Pstatus[i] << " "
-			<< Medu[i] << " "
-			<< Fedu[i] << " "
-			<< Mjob[i] << " "
-			<< Fjob[i] << " "
-			<< reason[i] << " "
-			<< guardian[i] << " "
-			<< traveltime[i] << " "
-			<< studytime[i] << " "
-			<< failures[i] << " "
-			<< school[i] << " "
-			<< famsup[i] << " "
-			<< paid[i] << " "
-			<< activities[i] << " "
-			<< nursery[i] << " "
-			<< higher[i] << " "
-			<< internet[i] << " "
-			<< romantic[i] << " "
-			<< famrel[i] << " "
-			<< freetime[i] << " "
-			<< goout[i] << " "
-			<< Dalc[i] << " "
-			<< Walc[i] << " "
-			<< health[i] << " "
-			<< absences[i] << " "
-			<< G1[i] << " "
-			<< G2[i] << " "
-			<< G3[i] << " " << std::endl;
+		std::cout << std::left
+			<< std::setw(3) << school[i]
+			<< std::setw(2) << sex[i]
+			<< std::setw(3) << age[i]
+			<< std::setw(2) << address[i]
+			<< std::setw(4) << famsize[i]
+			<< std::setw(2) << Pstatus[i]
+			<< std::setw(2) << Medu[i]
+			<< std::setw(2) << Fedu[i]
+			<< std::setw(10) << Mjob[i]
+			<< std::setw(10) << Fjob[i]
+			<< std::setw(11) << reason[i]
+			<< std::setw(7) << guardian[i]
+			<< std::setw(2) << traveltime[i]
+			<< std::setw(2) << studytime[i]
+			<< std::setw(2) << failures[i]
+			<< std::setw(2) << schoolsup[i]
+			<< std::setw(2) << famsup[i]
+			<< std::setw(2) << paid[i]
+			<< std::setw(2) << activities[i]
+			<< std::setw(2) << nursery[i]
+			<< std::setw(2) << higher[i]
+			<< std::setw(2) << internet[i]
+			<< std::setw(2) << romantic[i]
+			<< std::setw(2) << famrel[i]
+			<< std::setw(2) << freetime[i]
+			<< std::setw(2) << goout[i]
+			<< std::setw(2) << Dalc[i]
+			<< std::setw(2) << Walc[i]
+			<< std::setw(2) << health[i]
+			<< std::setw(3) << absences[i]
+			<< std::setw(3) << G1[i]
+			<< std::setw(3) << G2[i]
+			<< std::setw(3) << G3[i] << std::endl;
 	}
 }
 
