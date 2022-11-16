@@ -99,6 +99,42 @@ int Data::convertBinary(std::string str) {
 		return 0;
 }
 
+void Data::swapData(int i, int j) {
+	std::swap(school[i], school[j]);
+	std::swap(sex[i], sex[j]);
+	std::swap(age[i], age[j]);
+	std::swap(address[i], address[j]);
+	std::swap(famsize[i], famsize[j]);
+	std::swap(Pstatus[i], Pstatus[j]);
+	std::swap(Medu[i], Medu[j]);
+	std::swap(Fedu[i], Fedu[j]);
+	std::swap(Mjob[i], Mjob[j]);
+	std::swap(Fjob[i], Fjob[j]);
+	std::swap(reason[i], reason[j]);
+	std::swap(guardian[i], guardian[j]);
+	std::swap(traveltime[i], traveltime[j]);
+	std::swap(studytime[i], studytime[j]);
+	std::swap(failures[i], failures[j]);
+	std::swap(schoolsup[i], schoolsup[j]);
+	std::swap(famsup[i], famsup[j]);
+	std::swap(paid[i], paid[j]);
+	std::swap(activities[i], activities[j]);
+	std::swap(nursery[i], nursery[j]);
+	std::swap(higher[i], higher[j]);
+	std::swap(internet[i], internet[j]);
+	std::swap(romantic[i], romantic[j]);
+	std::swap(famrel[i], famrel[j]);
+	std::swap(freetime[i], freetime[j]);
+	std::swap(goout[i], goout[j]);
+	std::swap(Dalc[i], Dalc[j]);
+	std::swap(Walc[i], Walc[j]);
+	std::swap(health[i], health[j]);
+	std::swap(absences[i], absences[j]);
+	std::swap(G1[i], G1[j]);
+	std::swap(G2[i], G2[j]);
+	std::swap(G3[i], G3[j]);
+}
+
 void Data::printData() const {
 	for (unsigned int i = 0; i < school.size(); i++) {
 		std::cout << std::left

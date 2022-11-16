@@ -7,16 +7,63 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <map>
 
 class Data {
 public:
 	Data();
 	Data(std::string inFile);
 
+	//printing functions
 	//printing the whole data file
 	void printData() const;
 	//printing number of data on top and bottom
 	void printDataPartial(unsigned int top, unsigned int bottom) const;
+
+	//sorting quick function
+	template<typename T> void sort(std::vector<T>& vec, int start, int end) {
+		if (start >= end)
+			return;
+
+		int p = partition(vec, start, end);
+
+		sort(vec, start, p - 1);
+		sort(vec, p + 1, end);
+	}
+
+	template<typename T> int partition(std::vector<T>& vec, int start, int end) {
+		T pivot = vec[start];
+
+		int count = 0;
+		for (int i = start + 1; i <= end; i++) {
+			if (vec[i] <= pivot)
+				count++;
+		}
+
+		int pivotIndex = start + count;
+		swapData(pivotIndex, start);
+		std::swap(vec[pivotIndex], vec[start]);
+
+		int i = start, j = end;
+
+		while (i < pivotIndex && j > pivotIndex) {
+			while (vec[i] <= pivot) {
+				i++;
+			}
+			while (vec[j] > pivot) {
+				j--;
+			}
+			if (i < pivotIndex && j > pivotIndex) {
+				swapData(i, j);
+				std::swap(vec[i++], vec[j--]);
+			}
+		}
+
+		return pivotIndex;
+	}
+
+	//swap data's vectors to keep consistencies
+	void swapData(int i, int j);
 
 	//accessors
 	std::vector<std::string> getSchool() const;
@@ -52,7 +99,6 @@ public:
 	std::vector<int> getG1() const;
 	std::vector<int> getG2() const;
 	std::vector<int> getG3() const;
-
 private:
 	//functions
 	//convert binaries from yes/or to 1/0
