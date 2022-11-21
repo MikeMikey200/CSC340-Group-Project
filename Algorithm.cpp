@@ -7,6 +7,76 @@ Algorithm::Algorithm(Data mat, Data por) {
 	this->por = por;
 }
 
+/**This funciton will compare the study habits of students overall as compared to studnets who drink above average**/
+void Algorithm::algorithm2() {
+	//find average study time for each data set
+	double averageMatST = avg(mat.getStudytime(), 0, mat.getStudytime().size());
+	double averagePorST = avg(por.getStudytime(), 0, por.getStudytime().size());
+
+	//combine into one overall average
+	double overallAverageST = (averageMatST + averagePorST) / 2.0;
+
+	//find average weekly drinking habits for each student
+	double averageMatWAlc = avg(mat.getWAlc(), 0, mat.getWAlc().size());
+	double averagePorWAlc = avg(por.getWAlc(), 0, por.getWAlc().size());
+
+	//find average weekend drinking habits for each student
+	double averageMatDAlc = avg(mat.getDAlc(), 0, mat.getDAlc().size());
+	double averagePorDAlc = avg(por.getDAlc(), 0, por.getDAlc().size());
+
+	//combine into one overall drinking average
+	double overallAverageAlc = (averageMatWAlc + averagePorWAlc + averageMatDAlc + averagePorDAlc) / 4.0;
+
+	//cout << fixed << setprecision(2);
+	std::cout << "The average study time overall for all students is " << overallAverageST << std::endl;
+	std::cout << "The average drinking of all students is " << overallAverageAlc << std::endl;
+
+	int sum = 0; //for average study time of people who drink more than average
+	int counter = 0; //keep track of how many for average equation
+	double tempDrinkAveMat = 0; //to average each student's drinking habits of week and weekend
+	double tempDrinkAvePor = 0;
+	//for loop to find average study time for people who drink above average compared to their peers
+	for (unsigned long i = 0; i < mat.getWAlc().size(); i++) {
+
+		tempDrinkAveMat = mat.getWAlc().at(i) + mat.getDAlc().at(i) / 2.0;
+		tempDrinkAvePor = por.getWAlc().at(i) + por.getDAlc().at(i) / 2.0;
+
+		if (tempDrinkAveMat > overallAverageAlc) {
+			sum += mat.getStudytime().at(i);
+			counter++;
+		}
+		if (tempDrinkAvePor > overallAverageAlc) {
+			sum += por.getStudytime().at(i);
+			counter++;
+		}
+	}
+
+	double aveOfDrinkersStudyTime = (double)sum / counter;
+	std::cout << "The average study time of students who drink above average is "
+		<< aveOfDrinkersStudyTime << std::endl;
+
+	sum = 0; //reset values
+	counter = 0;
+	//for loop to check for students who drink under the average
+	for (unsigned long i = 0; i < mat.getWAlc().size(); i++) {
+
+		tempDrinkAveMat = mat.getWAlc().at(i) + mat.getDAlc().at(i) / 2.0;
+		tempDrinkAvePor = por.getWAlc().at(i) + por.getDAlc().at(i) / 2.0;
+
+		if (tempDrinkAveMat < overallAverageAlc) {
+			sum += mat.getStudytime().at(i);
+			counter++;
+		}
+		if (tempDrinkAvePor < overallAverageAlc) {
+			sum += por.getStudytime().at(i);
+			counter++;
+		}
+	}
+	double aveOfNonDrinkersStudyTime = (double)sum / counter;
+	std::cout << "The average study time of students who drink below average is "
+		<< aveOfNonDrinkersStudyTime << "\n" << std::endl;
+}
+
 /*
 * Comparing extra expenses to alcohol consumption for math and portuguese
 * Using these dataset
@@ -623,6 +693,8 @@ void Algorithm::algorithm3() {
 	std::cout << "Observation 2: Likely than not, alcohol consumptions shouldn't be much of a different when attending a math or a portuguese course.\n\n";
 }
 
+/**This function will find the average in a vector
+ parameters: vector to find average of, and the beginning and end of where we want to find the average**/
 double Algorithm::avg(std::vector<int> vec, int beg, int end) {
 	int sum = 0;
 	for (; beg < end; beg++) {
