@@ -90,6 +90,8 @@ Data::Data(std::string fname) {
 		getline(sstr, token, ',');
 		G3.push_back(std::stoi(token));
 	}
+
+	inFile.close();
 }
 
 int Data::convertBinary(std::string str) {

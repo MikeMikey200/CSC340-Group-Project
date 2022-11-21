@@ -104,8 +104,8 @@ void Algorithm::algorithm3() {
 	double avgMatHigher = avg(mat.getHigher(), 0, mat.getHigher().size());
 	double avgMatInternet = avg(mat.getInternet(), 0, mat.getInternet().size());
 	double avgMatRomantic = avg(mat.getRomantic(), 0, mat.getRomantic().size());
-	std::vector<int> matDAlcFreq = frequency(mat.getDAlc());
-	std::vector<int> matWAlcFreq = frequency(mat.getWAlc());
+	std::vector<int> matDAlcFreq = frequency(mat.getDAlc(), 5, 1);
+	std::vector<int> matWAlcFreq = frequency(mat.getWAlc(), 5, 1);
 	double avgMatExpenses = (avgMatSchoolSup + avgMatFamSup + avgMatPaid + avgMatActivities + avgMatNursery + avgMatHigher + avgMatInternet + avgMatRomantic) / 8.0;
 	double avgMatAlc = (avg(mat.getDAlc(), 0, mat.getDAlc().size()) + avg(mat.getWAlc(), 0, mat.getWAlc().size())) / 2.0;
 
@@ -118,8 +118,8 @@ void Algorithm::algorithm3() {
 	double avgPorHigher = avg(por.getHigher(), 0, por.getHigher().size());
 	double avgPorInternet = avg(por.getInternet(), 0, por.getInternet().size());
 	double avgPorRomantic = avg(por.getRomantic(), 0, por.getRomantic().size());
-	std::vector<int> porDAlcFreq = frequency(por.getDAlc());
-	std::vector<int> porWAlcFreq = frequency(por.getWAlc());
+	std::vector<int> porDAlcFreq = frequency(por.getDAlc(), 5, 1);
+	std::vector<int> porWAlcFreq = frequency(por.getWAlc(), 5, 1);
 	double avgPorExpenses = (avgPorSchoolSup + avgPorFamSup + avgPorPaid + avgPorActivities + avgPorNursery + avgPorHigher + avgPorInternet + avgPorRomantic) / 8.0;
 	double avgPorAlc = (avg(por.getDAlc(), 0, por.getDAlc().size()) + avg(por.getWAlc(), 0, por.getWAlc().size())) / 2.0;
 
@@ -632,8 +632,11 @@ void Algorithm::algorithm3() {
 	std::cout << "---------------------------Math course---------------------------";
 	std::cout << "\nThe weekdays consumption of alcohol for the math course:\n";
 	printFrequency(matDAlcFreq, 0);
+	std::cout << "\nThe average of alcohol consumption for weekdays: " << avg(matDAlcVec, 0, matDAlcVec.size()) << "\n";
 	std::cout << "\nThe weekends consumption of alcohol for the math course:\n";
 	printFrequency(matWAlcFreq, 0);
+	std::cout << "\nThe average of alcohol consumption for weekends: " << avg(matWAlcVec, 0, matWAlcVec.size()) << "\n";
+	std::cout << "\nAn increased of " << (avg(matWAlcVec, 0, matWAlcVec.size()) + avg(matDAlcVec, 0, matDAlcVec.size())) / avg(matWAlcVec, 0, matWAlcVec.size()) * 100.0 << "% in alcohol consumption going from weekdays into weekends\n";
 	
 	std::cout << "\nApproximate " << std::setprecision(3) << matSum << "% of the students in math course has gotten some form of outside of school support. (n = " << matSchoolSupVec.size() << ")\n";
 	std::cout << 1 << ": " << matSumAvg[0] << "% of the students has very low alcohol consumption.\n";
@@ -661,8 +664,11 @@ void Algorithm::algorithm3() {
 	std::cout << "---------------------------Portuguese course---------------------------";
 	std::cout << "\nThe weekdays consumption of alcohol for the portuguese course:\n";
 	printFrequency(porDAlcFreq, 1);
+	std::cout << "\nThe average of alcohol consumption for weekdays: " << avg(porDAlcVec, 0, porDAlcVec.size()) << "\n";
 	std::cout << "\nThe weekends consumption of alcohol for the portuguese course:\n";
 	printFrequency(porWAlcFreq, 1);
+	std::cout << "\nThe average of alcohol consumption for weekdays: " << avg(porWAlcVec, 0, porWAlcVec.size()) << "\n";
+	std::cout << "\nAn increased of " << (avg(porWAlcVec, 0, porWAlcVec.size()) + avg(porDAlcVec, 0, porDAlcVec.size())) / avg(porWAlcVec, 0, porWAlcVec.size()) * 100.0 << "% in alcohol consumption going from weekdays into weekends\n";
 
 	std::cout << "\nApproximate " << std::setprecision(3) << porSum << "% of the students in portueguese course has gotten some form of outside of school support. (n = " << porSchoolSupVec.size() << ")\n";
 	std::cout << 1 << ": " << porSumAvg[0] << "% of the students has very low alcohol consumption.\n";
@@ -687,10 +693,11 @@ void Algorithm::algorithm3() {
 
 	std::cout << " : " << avgPorExpenses * 100.0 << "% of overall outside of school supports the students has.\n\n";
 
-	std::cout << " : " << "The average alcohol consumption of portuguese course is " << std::setprecision(5) << (avgPorAlc / avgMatAlc - 1) * 100.0 << "% higher than math course. (a very small and negligible number when comparing the two courses)\n\n";
+	std::cout << " : " << "The average alcohol consumption of portuguese course is " << std::setprecision(5) << (avgPorAlc - avgMatAlc) / avgMatAlc * 100.0 << "% higher than math course. (a very small and negligible number when comparing the two courses)\n\n";
 
 	std::cout << "Observation 1: The students are more like to have a higher alcohol consumptions when having less outside of school support, as this is a trend for both math course and portuguese course.\n";
-	std::cout << "Observation 2: Likely than not, alcohol consumptions shouldn't be much of a different when attending a math or a portuguese course.\n\n";
+	std::cout << "Observation 2: Likely than not, alcohol consumptions shouldn't be much of a different when attending a math or a portuguese course.\n";
+	std::cout << "Observation 3: Students are more likely to drink way more often during weekends than weekdays\n\n";
 }
 
 /**This function will find the average in a vector
@@ -703,11 +710,17 @@ double Algorithm::avg(std::vector<int> vec, int beg, int end) {
 	return sum / (double) vec.size();
 }
 
-//return a vector of frequencies for data numeric: from 1 - very low to 5 - very high
-std::vector<int> Algorithm::frequency(std::vector<int> vec) {
-	std::vector<int> vecMode { 0, 0, 0, 0, 0 };
+//return a vector of frequencies for data
+std::vector<int> Algorithm::frequency(std::vector<int> vec, unsigned int set, int nonZero) {
+	std::vector<int> vecMode{};
+	for (unsigned int i = 0; i < set; i++) {
+		vecMode.push_back(0);
+	}
 	for (unsigned int i = 0; i < vec.size(); i++) {
-		vecMode[vec[i] - 1] = vecMode[vec[i] - 1] + 1;
+		if (nonZero)
+			vecMode[vec[i] - 1] = vecMode[vec[i] - 1] + 1;
+		else
+			vecMode[vec[i]] = vecMode[vec[i]] + 1;
 	}
 	return vecMode;
 }

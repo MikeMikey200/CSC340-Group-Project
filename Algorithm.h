@@ -16,7 +16,7 @@ public:
 
 	//math functions
 	double avg(std::vector<int> vec, int beg, int end);
-	std::vector<int> frequency(std::vector<int> vec);
+	std::vector<int> frequency(std::vector<int> vec, unsigned int set, int nonZero);
 
 	//print functions
 	void printFrequency(std::vector<int> frequency, int course);
