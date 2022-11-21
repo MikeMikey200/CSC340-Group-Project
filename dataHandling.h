@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iomanip>
 #include <map>
+#include <algorithm>
 
 class Data {
 public:
