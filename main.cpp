@@ -1,6 +1,4 @@
 #include "Algorithm.h"
-
-template<typename T> void printVect(std::vector<T> vec, int num);
 //Andre's funcitons
 double findAverage(std::vector<int> vec, unsigned long begin, unsigned long end);
 void compareStudyAndDrinking(Data mat, Data por);
@@ -13,19 +11,8 @@ int main()
     Data mat("student-mat.csv");
     Data por("student-por.csv");
 
-    //sample how to use sort and print functions
-    //printing top 20 and bottom 20 data
-    mat.printDataPartial(5, 5);
-    //targetting specifically absences vector
-    vector<int> absences = mat.getAbsences();
-    mat.sort(absences, 0, absences.size() - 1);
-    cout << "\n\n\n";
-    //printing top 20 and bottom 20 sorted data
-    mat.printDataPartial(5, 5);
-
     Algorithm algorithm(mat, por);
 
-    cout << "\n\n\n";
     algorithm.algorithm3();
 
     compareStudyAndDrinking(mat, por);

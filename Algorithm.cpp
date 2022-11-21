@@ -37,6 +37,7 @@ void Algorithm::algorithm3() {
 	std::vector<int> matDAlcFreq = frequency(mat.getDAlc());
 	std::vector<int> matWAlcFreq = frequency(mat.getWAlc());
 	double avgMatExpenses = (avgMatSchoolSup + avgMatFamSup + avgMatPaid + avgMatActivities + avgMatNursery + avgMatHigher + avgMatInternet + avgMatRomantic) / 8.0;
+	double avgMatAlc = (avg(mat.getDAlc(), 0, mat.getDAlc().size()) + avg(mat.getWAlc(), 0, mat.getWAlc().size())) / 2.0;
 
 	//por
 	double avgPorSchoolSup = avg(por.getSchoolsup(), 0, por.getSchoolsup().size());
@@ -50,20 +51,7 @@ void Algorithm::algorithm3() {
 	std::vector<int> porDAlcFreq = frequency(por.getDAlc());
 	std::vector<int> porWAlcFreq = frequency(por.getWAlc());
 	double avgPorExpenses = (avgPorSchoolSup + avgPorFamSup + avgPorPaid + avgPorActivities + avgPorNursery + avgPorHigher + avgPorInternet + avgPorRomantic) / 8.0;
-
-	std::cout << "\nThe weekdays consumption of alcohol for the math course:\n";
-	printFrequency(matDAlcFreq, 0);
-	std::cout << "\nThe weekdays consumption of alcohol for the portuguese course:\n";
-	printFrequency(porDAlcFreq, 1);
-	std::cout << "\nThe weekends consumption of alcohol for the math course:\n";
-	printFrequency(matWAlcFreq, 0);
-	std::cout << "\nThe weekends consumption of alcohol for the portuguese course:\n";
-	printFrequency(porWAlcFreq, 1);
-
-	/*
-	* at first we see that the differences in weekdays and weekends for alcohol consumption comparision between Math and Portuguese is a very small change
-	* so we further dig into what causes students consuming alcohol from very low, low, medium, high, and very high level based off of expenses
-	*/
+	double avgPorAlc = (avg(por.getDAlc(), 0, por.getDAlc().size()) + avg(por.getWAlc(), 0, por.getWAlc().size())) / 2.0;
 
 	std::vector<int> matSchoolSupDAlc{ 0,0,0,0,0 };
 	std::vector<int> matFamSupDAlc{ 0,0,0,0,0 };
@@ -571,7 +559,13 @@ void Algorithm::algorithm3() {
 		porSum += porSumAvg[i];
 	}
 
-	std::cout << "\nApproximate " << std::setprecision(3) << matSum << "% of the students in math course has gotten some form of outside of school support.\n";
+	std::cout << "---------------------------Math course---------------------------";
+	std::cout << "\nThe weekdays consumption of alcohol for the math course:\n";
+	printFrequency(matDAlcFreq, 0);
+	std::cout << "\nThe weekends consumption of alcohol for the math course:\n";
+	printFrequency(matWAlcFreq, 0);
+	
+	std::cout << "\nApproximate " << std::setprecision(3) << matSum << "% of the students in math course has gotten some form of outside of school support. (n = " << matSchoolSupVec.size() << ")\n";
 	std::cout << 1 << ": " << matSumAvg[0] << "% of the students has very low alcohol consumption.\n";
 	std::cout << " : " << matSumAvg[0] / matFreqAvg[0] * 100.0 << "% chances student likely to have an outside of school support.\n\n";
 	std::cout << 2 << ": " << matSumAvg[1] << "% of the students has low alcohol consumption.\n";
@@ -583,7 +577,24 @@ void Algorithm::algorithm3() {
 	std::cout << 5 << ": " << matSumAvg[4] << "% of the students has very high alcohol consumption.\n";
 	std::cout << " : " << matSumAvg[4] / matFreqAvg[4] * 100.0 << "% chances student likely to have an outside of school support.\n\n";
 
-	std::cout << "Approximate " << std::setprecision(3) << porSum << "% of the students in portueguese course has gotten some form of outside of school support.\n";
+	std::cout << " : " << avgMatSchoolSup * 100.0 << "% of the students has extra educational support.\n";
+	std::cout << " : " << avgMatFamSup * 100.0 << "% of the students has family educational support.\n";
+	std::cout << " : " << avgMatPaid * 100.0 << "% of the students has extra paid classes within the course subject.\n";
+	std::cout << " : " << avgMatActivities * 100.0 << "% of the students has extra-curricular activities.\n";
+	std::cout << " : " << avgMatNursery * 100.0 << "% of the students has attended nursery school.\n";
+	std::cout << " : " << avgMatHigher * 100.0 << "% of the students wants to take higher education.\n";
+	std::cout << " : " << avgMatInternet * 100.0 << "% of the students has internet access at home.\n";
+	std::cout << " : " << avgMatRomantic * 100.0 << "% of the students has a romantic relationship.\n\n";
+
+	std::cout << " : " << avgMatExpenses * 100.0 << "% of overall outside of school supports the students has.\n\n";
+
+	std::cout << "---------------------------Portuguese course---------------------------";
+	std::cout << "\nThe weekdays consumption of alcohol for the portuguese course:\n";
+	printFrequency(porDAlcFreq, 1);
+	std::cout << "\nThe weekends consumption of alcohol for the portuguese course:\n";
+	printFrequency(porWAlcFreq, 1);
+
+	std::cout << "\nApproximate " << std::setprecision(3) << porSum << "% of the students in portueguese course has gotten some form of outside of school support. (n = " << porSchoolSupVec.size() << ")\n";
 	std::cout << 1 << ": " << porSumAvg[0] << "% of the students has very low alcohol consumption.\n";
 	std::cout << " : " << porSumAvg[0] / porFreqAvg[0] * 100.0 << "% chances student likely to have an outside of school support.\n\n";
 	std::cout << 2 << ": " << porSumAvg[1] << "% of the students has low alcohol consumption.\n";
@@ -595,7 +606,21 @@ void Algorithm::algorithm3() {
 	std::cout << 5 << ": " << porSumAvg[4] << "% of the students has very high alcohol consumption.\n";
 	std::cout << " : " << porSumAvg[4] / porFreqAvg[4] * 100.0 << "% chances student likely to have an outside of school support.\n\n";
 
-	std::cout << "Obervation: The students are more like to have a higher alcohol consumptions when having less outside of school support, as this is a trend for both math course and portuguese course.\n";
+	std::cout << " : " << avgPorSchoolSup * 100.0 << "% of the students has extra educational support.\n";
+	std::cout << " : " << avgPorFamSup * 100.0 << "% of the students has family educational support.\n";
+	std::cout << " : " << avgPorPaid * 100.0 << "% of the students has extra paid classes within the course subject.\n";
+	std::cout << " : " << avgPorActivities * 100.0 << "% of the students has extra-curricular activities.\n";
+	std::cout << " : " << avgPorNursery * 100.0 << "% of the students has attended nursery school.\n";
+	std::cout << " : " << avgPorHigher * 100.0 << "% of the students wants to take higher education.\n";
+	std::cout << " : " << avgPorInternet * 100.0 << "% of the students has internet access at home.\n";
+	std::cout << " : " << avgPorRomantic * 100.0 << "% of the students has a romantic relationship.\n\n";
+
+	std::cout << " : " << avgPorExpenses * 100.0 << "% of overall outside of school supports the students has.\n\n";
+
+	std::cout << " : " << "The average alcohol consumption of portuguese course is " << std::setprecision(5) << (avgPorAlc / avgMatAlc - 1) * 100.0 << "% higher than math course. (a very small and negligible number when comparing the two courses)\n\n";
+
+	std::cout << "Observation 1: The students are more like to have a higher alcohol consumptions when having less outside of school support, as this is a trend for both math course and portuguese course.\n";
+	std::cout << "Observation 2: Likely than not, alcohol consumptions shouldn't be much of a different when attending a math or a portuguese course.\n\n";
 }
 
 double Algorithm::avg(std::vector<int> vec, int beg, int end) {
@@ -606,6 +631,7 @@ double Algorithm::avg(std::vector<int> vec, int beg, int end) {
 	return sum / (double) vec.size();
 }
 
+//return a vector of frequencies for data numeric: from 1 - very low to 5 - very high
 std::vector<int> Algorithm::frequency(std::vector<int> vec) {
 	std::vector<int> vecMode { 0, 0, 0, 0, 0 };
 	for (unsigned int i = 0; i < vec.size(); i++) {
@@ -614,7 +640,7 @@ std::vector<int> Algorithm::frequency(std::vector<int> vec) {
 	return vecMode;
 }
 
-
+//printing the vector of frequency in %
 void Algorithm::printFrequency(std::vector<int> frequency, int course) {
 	if (!course) {
 		for (unsigned int i = 0; i < frequency.size(); i++) {
