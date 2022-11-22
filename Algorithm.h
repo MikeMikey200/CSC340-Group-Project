@@ -1,42 +1,45 @@
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 
-#include "dataHandling.h"
-
-class Algorithm {
+#include "dataHandling.h" //Include Data class
+class Algorithm{
 public:
-	//constructor
-	Algorithm();
-	Algorithm(Data mat, Data por);
+	//Constructor to initialize DataFunction class private member variables
+	Algorithm(Data &file, Data &file2) {
+		mat = file;
+		por = file2;
+	};
 
-	//algorithm functions
-	void algorithm1();
-	void algorithm2();
-	void algorithm3();
+	//Using Minh's frequency function
+	//Used for tallying the amount of students alcohol consumption (1-5) (verylow - veryhigh)
+	//Takes the DAlc or WAlc vector as the parameter
+	//Returns a vector containing the amount of students corresponding to each alcohol consumption level
+	//index 0 corresponds to the total amount of students with very low alcohol consumption had in the course
+	//index 1 corresponds to the total amount of students with low alcohol consumption had in the course
+	std::vector<int> frequencyAhmar(std::vector<int> vec);
 
-	//math functions
-	double avg(std::vector<int> vec, int beg, int end);
-	std::vector<int> frequency(std::vector<int> vec, unsigned int set, int nonZero);
+	//Ahmar's Function
+	//A function to add up the total absences in each alcohol consumption level (1-5) (verylow - very high)
+	//Takes in the DAlc or WAlc vector and the absences vector as parameters
+	//Returns a vector containing the amount of absences corrseponding to each alcohol consumption level
+	//index 0 corresponds to the total amount of absences that students with very low alcohol consumption had in the course
+	//index 1 corresponds to the total amount of absences that students with low alcohol consumption had in the course
+	std::vector<int> frequencyAbsentAhmar(std::vector<int> vec, std::vector<int> vec2);
 
-	//print functions
-	void printFrequency(std::vector<int> frequency, int course);
+	//Ahmar's Function
+	//Function to print the averages of alcohol consumption (1-5)(verylow - veryhigh) and absences
+	//Takes 4 parameters:
+	//1. The vector returned from frequency() function
+	//2. The vector returned from frequencyAbsent() function
+	//3. An int value (0 or 1) where 0 corresonds to weekday and 1 corresponds to weekend
+	//4. An int value (0 or 1) where 0 corresonds to the math course and 1 corresponds to the portuguese course
+	void printAveragesAhmar(std::vector<int> frequency, std::vector<int> frequencyAbsent, int day, int course);
 
-	template<typename T> void printVect(std::vector<T> vec, int num) {
-		int i = 0;
-		for (T item : vec) {
-			if (i > num) {
-				std::cout << "\n";
-				i = 0;
-			}
-			std::cout << std::left << std::setw(3) << item << " ";
-			i++;
-		}
-		std::cout << "\n";
-	}
+	void printObeservationsAhmar();
+
 
 private:
-	Data mat;
-	Data por;
+	Data mat; //Data object for math course dataset
+	Data por; //Data object for portuguese course dataset
 };
-
-#endif // !ALGORITHM_H
+#endif // !ALGORITHM
