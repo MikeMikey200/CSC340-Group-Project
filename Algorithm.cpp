@@ -64,72 +64,130 @@ void Algorithm::printObeservationsAhmar()
 
 /**This funciton will compare the study habits of students overall as compared to studnets who drink above average**/
 void Algorithm::compareStudyAndDrinking() {
-	//find average study time for each data set
-	double averageMatST = avg(mat.getStudytime(), 0, mat.getStudytime().size());
-	double averagePorST = avg(por.getStudytime(), 0, por.getStudytime().size());
+    //find average study time for each data set
+    double averageMatST = avg(mat.getStudytime(), 0, mat.getStudytime().size());
+    double averagePorST = avg(por.getStudytime(), 0, por.getStudytime().size());
 
-	//combine into one overall average
-	double overallAverageST = (averageMatST + averagePorST) / 2.0;
+    //combine into one overall average
+    double overallAverageST = (averageMatST + averagePorST) / 2.0;
 
-	//find average weekly drinking habits for each student
-	double averageMatWAlc = avg(mat.getWAlc(), 0, mat.getWAlc().size());
-	double averagePorWAlc = avg(por.getWAlc(), 0, por.getWAlc().size());
+    //find average weekly drinking habits for each student
+    double averageMatWAlc = avg(mat.getWAlc(), 0, mat.getWAlc().size());
+    double averagePorWAlc = avg(por.getWAlc(), 0, por.getWAlc().size());
 
-	//find average weekend drinking habits for each student
-	double averageMatDAlc = avg(mat.getDAlc(), 0, mat.getDAlc().size());
-	double averagePorDAlc = avg(por.getDAlc(), 0, por.getDAlc().size());
+    //find average weekend drinking habits for each student
+    double averageMatDAlc = avg(mat.getDAlc(), 0, mat.getDAlc().size());
+    double averagePorDAlc = avg(por.getDAlc(), 0, por.getDAlc().size());
 
-	//combine into one overall drinking average
-	double overallAverageAlc = (averageMatWAlc + averagePorWAlc + averageMatDAlc + averagePorDAlc) / 4.0;
+    //get average drikning for mat Students
+    double averageMatDrink = (averageMatWAlc + averageMatDAlc) / 2.0;
+    
+    //get average drinking for por students
+    double averagePorDrink = (averagePorWAlc + averagePorDAlc) / 2.0;
 
-	//cout << fixed << setprecision(2);
-	std::cout << "The average study time overall for all students is " << overallAverageST << std::endl;
-	std::cout << "The average drinking of all students is " << overallAverageAlc << std::endl;
+    //combine into one overall drinking average
+    double overallAverageAlc = (averageMatWAlc + averagePorWAlc + averageMatDAlc + averagePorDAlc) / 4.0;
 
-	int sum = 0; //for average study time of people who drink more than average
-	int counter = 0; //keep track of how many for average equation
-	double tempDrinkAveMat = 0; //to average each student's drinking habits of week and weekend
-	double tempDrinkAvePor = 0;
-	//for loop to find average study time for people who drink above average compared to their peers
-	for (unsigned long i = 0; i < mat.getWAlc().size(); i++) {
+    //for loop to find average study time for mat students who drink above or below average
+    
+    int sum = 0; //for average study time of people who drink more than average
+    int sum2 = 0; //for average study time of people who drink below average
+    int counter = 0; //keep track of how many for average equation of above average drinkers
+    int counter2 = 0; //keep track of how many for average equation of below average drinkers
+    double matStudentsAboveDrinkingStudyTimeAve = 0;
+    int matAboveCounter = 0;
+    double matStudentsBelowDrinkingStudyTimeAve = 0;
+    int matBelowCounter = 0;
+    double porStudentsAboveDrinkingStudyTimeAve = 0;
+    int porAboveCounter = 0;
+    double porStudendsBelowDrinkingStudyTimeAve = 0;
+    int porBelowcounter = 0;
+    double tempDrinkAveMat = 0; //to average each student's drinking habits of week and weekend
+    double tempDrinkAvePor = 0;
+    //for loop to find average study time for people who drink above or below average compared to their peers
+    for (unsigned long i = 0; i < mat.getWAlc().size(); i++) {
+        
+        tempDrinkAveMat = mat.getWAlc().at(i) + mat.getDAlc().at(i) / 2.0;
+        tempDrinkAvePor = por.getWAlc().at(i) + por.getDAlc().at(i) / 2.0;
 
-		tempDrinkAveMat = mat.getWAlc().at(i) + mat.getDAlc().at(i) / 2.0;
-		tempDrinkAvePor = por.getWAlc().at(i) + por.getDAlc().at(i) / 2.0;
+        //get data for mat students
+        if (tempDrinkAveMat > averageMatDrink){
+            matStudentsAboveDrinkingStudyTimeAve += mat.getStudytime().at(i);
+            matAboveCounter++;
+        } else{
+            matStudentsBelowDrinkingStudyTimeAve += mat.getStudytime().at(i);
+            matBelowCounter++;
+        }
+        
+        //get data for por students
+        if (tempDrinkAvePor > averagePorDrink){
+            porStudentsAboveDrinkingStudyTimeAve += mat.getStudytime().at(i);
+            porAboveCounter++;
+        } else{
+            porStudendsBelowDrinkingStudyTimeAve += mat.getStudytime().at(i);
+            porBelowcounter++;
+        }
+        
 
-		if (tempDrinkAveMat > overallAverageAlc) {
-			sum += mat.getStudytime().at(i);
-			counter++;
-		}
-		if (tempDrinkAvePor > overallAverageAlc) {
-			sum += por.getStudytime().at(i);
-			counter++;
-		}
-	}
+        if (tempDrinkAveMat > overallAverageAlc) {
+            sum += mat.getStudytime().at(i);
+            counter++;
+        }else{
+            sum2 += mat.getStudytime().at(i);
+            counter2++;
+        }
+        
+        if (tempDrinkAvePor > overallAverageAlc) {
+            sum += por.getStudytime().at(i);
+            counter++;
+        }else{
+            sum2 += por.getStudytime().at(i);
+            counter2++;
+        }
+    }
 
-	double aveOfDrinkersStudyTime = (double)sum / counter;
-	std::cout << "The average study time of students who drink above average is "
-		<< aveOfDrinkersStudyTime << std::endl;
+    double aveOfDrinkersStudyTime = (double)sum / counter;
+    double aveOfNonDrinkersStudyTime = (double)sum2 / counter2;
+    matStudentsBelowDrinkingStudyTimeAve /= (double) matBelowCounter;
+    matStudentsAboveDrinkingStudyTimeAve /= (double) matAboveCounter;
+    porStudendsBelowDrinkingStudyTimeAve /= (double) porBelowcounter;
+    porStudentsAboveDrinkingStudyTimeAve /= (double) porAboveCounter;
 
-	sum = 0; //reset values
-	counter = 0;
-	//for loop to check for students who drink under the average
-	for (unsigned long i = 0; i < mat.getWAlc().size(); i++) {
 
-		tempDrinkAveMat = mat.getWAlc().at(i) + mat.getDAlc().at(i) / 2.0;
-		tempDrinkAvePor = por.getWAlc().at(i) + por.getDAlc().at(i) / 2.0;
-
-		if (tempDrinkAveMat < overallAverageAlc) {
-			sum += mat.getStudytime().at(i);
-			counter++;
-		}
-		if (tempDrinkAvePor < overallAverageAlc) {
-			sum += por.getStudytime().at(i);
-			counter++;
-		}
-	}
-	double aveOfNonDrinkersStudyTime = (double)sum / counter;
-	std::cout << "The average study time of students who drink below average is "
-		<< aveOfNonDrinkersStudyTime << "\n" << std::endl;
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "-----MAT STUDENTS-----" << std::endl;
+    std::cout << "The average study time was " << averageMatST << " hrs." << std::endl;
+    std::cout << "The average weekly drinking rate was " << averageMatDAlc << "." << std::endl;
+    std::cout << "The average weekend drinking rate was " << averageMatWAlc << "." << std::endl;
+    std::cout << "The overall average drinking rate was "
+    << (averageMatDAlc + averageMatWAlc) / 2.0  << "." << std::endl;
+    std::cout << "The study time of students who drank above the overall average was "
+    << matStudentsAboveDrinkingStudyTimeAve << " hrs." << std::endl;
+    std::cout << "The study time of students who drank below the overall average was "
+    << matStudentsBelowDrinkingStudyTimeAve << " hrs.\n" << std::endl;
+    
+    std::cout << "-----POR STUDENTS-----" << std::endl;
+    std::cout << "The average study time was " << averagePorST << " hrs." << std::endl;
+    std::cout << "The average weekly drinking rate was " << averagePorDAlc << "." << std::endl;
+    std::cout << "The average weekend drinking rate was " << averagePorWAlc << "." << std::endl;
+    std::cout << "The overall average drinking rate was "
+    << (averagePorDAlc + averagePorWAlc) / 2.0  << "." << std::endl;
+    std::cout << "The study time of students who drank above the overall average was "
+    << porStudentsAboveDrinkingStudyTimeAve << "hrs." << std::endl;
+    std::cout << "The study time of students who drank below the overall average was "
+    << porStudendsBelowDrinkingStudyTimeAve << "hrs.\n" << std::endl;
+    
+    std::cout << "-----ALL STUDENTS-----" << std::endl;
+    std::cout << "The average study time overall is " << overallAverageST << std::endl;
+    std::cout << "The average weekly drinking rate was "
+    << (averagePorDAlc + averageMatDAlc) / 2.0 << "." << std::endl;
+    std::cout << "The average weekend drinking rate was "
+    << (averagePorWAlc + averageMatWAlc) / 2.0 << "." << std::endl;
+    std::cout << "The average drinking of all students is " << overallAverageAlc << std::endl;
+    std::cout << "The average study time of students who drink above average is "
+        << aveOfDrinkersStudyTime << " hrs." << std::endl;
+    std::cout << "The average study time of students who drink below average is "
+        << aveOfNonDrinkersStudyTime << " hrs.\n" << std::endl;
 }
 
 /*
