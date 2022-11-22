@@ -766,16 +766,13 @@ double Algorithm::avg(std::vector<int> vec, int beg, int end) {
 }
 
 //return a vector of frequencies for data
-std::vector<int> Algorithm::frequency(std::vector<int> vec, unsigned int set, int nonZero) {
+std::vector<int> Algorithm::frequency(std::vector<int> vec, unsigned int set, int indicesFixing) {
 	std::vector<int> vecMode{};
 	for (unsigned int i = 0; i < set; i++) {
 		vecMode.push_back(0);
 	}
 	for (unsigned int i = 0; i < vec.size(); i++) {
-		if (nonZero)
-			vecMode[vec[i] - 1] = vecMode[vec[i] - 1] + 1;
-		else
-			vecMode[vec[i]] = vecMode[vec[i]] + 1;
+		vecMode[vec[i] - indicesFixing] = vecMode[vec[i] - indicesFixing] + 1;
 	}
 	return vecMode;
 }
