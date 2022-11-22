@@ -4,11 +4,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <array>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
 #include <map>
-#include <algorithm>
 
 class Data {
 public:
@@ -100,6 +100,13 @@ public:
 	std::vector<int> getG1() const;
 	std::vector<int> getG2() const;
 	std::vector<int> getG3() const;
+
+	//Absences and Average Alcohol consumption Function
+	//void absencesAvgalcohol();
+
+	//Mode finder function for alcohol consumtion
+	//int DataFunction::modeFinder(std::vector<int>);
+
 private:
 	//functions
 	//convert binaries from yes/or to 1/0
