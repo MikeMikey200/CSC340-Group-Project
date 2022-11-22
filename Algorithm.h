@@ -10,16 +10,18 @@ public:
 	Algorithm(Data mat, Data por);
 
 	//algorithm functions
-	void algorithm1();
-	void algorithm2();
-	void algorithm3();
+	void printObeservationsAhmar();
+	void compareStudyAndDrinking();
+	void ExpensesAndAlcoholConsumption();
 
 	//math functions
 	double avg(std::vector<int> vec, int beg, int end);
 	std::vector<int> frequency(std::vector<int> vec, unsigned int set, int nonZero);
+	std::vector<int> frequencyAbsent(std::vector<int> vec, std::vector<int> vec2);
 
 	//print functions
 	void printFrequency(std::vector<int> frequency, int course);
+	void printAverages(std::vector<int> frequency, std::vector<int> frequencyAbsent, int day, int course);
 
 	template<typename T> void printVect(std::vector<T> vec, int num) {
 		int i = 0;

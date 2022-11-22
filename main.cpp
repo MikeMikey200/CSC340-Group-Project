@@ -10,8 +10,10 @@ int main()
 
     Algorithm algorithm(mat, por);
 
-    algorithm.algorithm2();
-    algorithm.algorithm3();
+    algorithm.printObeservationsAhmar();
+    cout << "\n";
+    algorithm.compareStudyAndDrinking();
+    algorithm.ExpensesAndAlcoholConsumption();
 
     return 0;
 }
